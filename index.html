@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrimeLogic - Web Development Experts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            dark: '#0f172a',
+          },
+          animation: {
+            fadeIn: 'fadeIn 1.5s ease-out',
+            slideUp: 'slideUp 1s ease-out',
+            float: 'float 6s ease-in-out infinite',
+            pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .tech-icon {
+      transition: all 0.3s ease;
+    }
+    .tech-icon:hover {
+      transform: scale(1.2) rotate(10deg);
+    }
+    .service-card:hover .service-icon {
+      transform: rotateY(180deg);
+    }
+    .team-card:hover .team-image {
+      transform: scale(1.05);
+    }
+    .portfolio-item {
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    .portfolio-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .portfolio-overlay {
+      background: rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    #mobile-menu.open {
+      max-height: 500px;
+    }
+    .hidden-portfolio {
+      display: none;
+    }
+    
+    /* Dark mode transitions */
+    body, .bg-white, .bg-gray-50, .bg-gray-100 {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Theme toggle button */
+    .theme-toggle {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      border-radius: 13px;
+      background: var(--toggle-bg, #e2e8f0);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--toggle-circle, #ffffff);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    
+    .dark .theme-toggle::after {
+      transform: translateX(24px);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-dark bg-white dark:bg-dark dark:text-white">
+<!-- Navbar -->
+<header class="bg-white dark:bg-gray-900 shadow-lg sticky top-0 z-50 animate-fadeIn">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
+        <i class="fas fa-code text-white"></i>
+      </div>
+      <h1 class="text-3xl font-extrabold text-primary tracking-wide">PrimeLogic</h1>
+    </div>
+    <nav class="hidden md:flex space-x-6 items-center">
+      <a href="#home" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Home <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#about" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        About <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#services" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Services <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#technologies" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Technologies <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#portfolio" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Portfolio <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#team" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Team <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#blog" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Blog <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      <a href="#contact" class="hover:text-primary transition duration-300 group dark:hover:text-primary">
+        Contact <span class="block h-0.5 bg-primary max-w-0 group-hover:max-w-full transition-all duration-300 dark:bg-primary"></span>
+      </a>
+      
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="ml-4 focus:outline-none text-gray-700 dark:text-gray-300">
+        <span id="theme-icon" class="text-xl">🌙</span>
+        <span class="sr-only">Toggle dark mode</span>
+      </button>
+    </nav>
+    <div class="flex items-center md:hidden">
+      <button id="theme-toggle-mobile" class="mr-4 focus:outline-none text-gray-700 dark:text-gray-300">
+        <span id="theme-icon-mobile" class="text-xl">🌙</span>
+        <span class="sr-only">Toggle dark mode</span>
+      </button>
+      <button class="text-primary text-2xl focus:outline-none" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div class="md:hidden bg-white dark:bg-gray-900 w-full px-4" id="mobile-menu">
+    <div class="flex flex-col space-y-4 py-4">
+      <a href="#home" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">Home</a>
+      <a href="#about" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">About</a>
+      <a href="#services" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">Services</a>
+      <a href="#technologies" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">Technologies</a>
+      <a href="#portfolio" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">Portfolio</a>
+      <a href="#team" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">Team</a>
+      <a href="#blog" class="hover:text-primary transition duration-300 py-2 border-b border-gray-100 dark:border-gray-700 dark:hover:text-primary">Blog</a>
+      <a href="#contact" class="hover:text-primary transition duration-300 py-2 dark:hover:text-primary">Contact</a>
+    </div>
+  </div>
+</header>
+  <!-- Hero Section -->
+  <section id="home" class="bg-gradient-to-r from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 py-24 text-center animate-fadeIn relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+      <div class="absolute top-20 left-10 w-20 h-20 bg-primary rounded-full animate-float"></div>
+      <div class="absolute top-1/3 right-1/4 w-16 h-16 bg-primary rounded-full animate-float" style="animation-delay: 1s;"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-primary rounded-full animate-float" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 right-20 w-12 h-12 bg-primary rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+    </div>
+    <div class="max-w-4xl mx-auto relative z-10">
+      <h2 class="text-5xl font-extrabold text-dark dark:text-white mb-6 animate-slideUp leading-tight">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">Custom & CMS-Based</span><br>Web Development Solutions
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 animate-slideUp">Empowering businesses with scalable and modern websites using WordPress, Shopify, MERN Stack, and Spring Boot.</p>
+      <div class="flex justify-center space-x-4">
+        <a href="#contact" class="bg-primary text-white px-8 py-3 rounded-full hover:bg-blue-700 transition transform hover:scale-105 font-medium shadow-lg flex items-center">
+          <span>Let's Build Together</span>
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+        <a href="#portfolio" class="border border-primary text-primary dark:text-white dark:border-white px-8 py-3 rounded-full hover:bg-blue-50 dark:hover:bg-gray-800 transition transform hover:scale-105 font-medium flex items-center">
+          <span>View Our Work</span>
+          <i class="fas fa-eye ml-2"></i>
+        </a>
+      </div>
+    </div>
+    <div class="mt-16 animate-slideUp">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="flex flex-col items-center">
+            <div class="text-4xl text-primary font-bold mb-2" id="projects-count">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Projects Completed</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl text-primary font-bold mb-2" id="clients-count">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Happy Clients</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl text-primary font-bold mb-2" id="experience-count">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Years Experience</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl text-primary font-bold mb-2" id="technologies-count">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Technologies</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 animate-fadeIn bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2 relative">
+          <div class="bg-primary bg-opacity-10 rounded-2xl p-4">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                 alt="Team working" 
+                 class="rounded-xl shadow-lg w-full h-auto">
+          </div>
+          <div class="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg">
+            <div class="text-3xl text-primary font-bold">5+</div>
+            <div class="text-gray-600 dark:text-gray-300">Years Experience</div>
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <h3 class="text-4xl font-bold mb-6 text-dark dark:text-white animate-slideUp">About PrimeLogic</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-lg mb-6 animate-slideUp">We are a web development company specializing in modern CMS solutions and custom development using the latest technologies. With a focus on performance, aesthetics, and scalability, we bring your ideas to life through code.</p>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
+                <i class="fas fa-check-circle text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg dark:text-white">Expert Team</h4>
+                <p class="text-gray-600 dark:text-gray-300">Our developers are certified experts in their respective technologies.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
+                <i class="fas fa-check-circle text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg dark:text-white">Agile Methodology</h4>
+                <p class="text-gray-600 dark:text-gray-300">We follow agile practices to deliver projects efficiently and on time.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
+                <i class="fas fa-check-circle text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg dark:text-white">Client-Centric Approach</h4>
+                <p class="text-gray-600 dark:text-gray-300">Your satisfaction is our top priority at every stage of development.</p>
+              </div>
+            </div>
+          </div>
+          <button class="mt-8 bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition transform hover:scale-105 font-medium shadow flex items-center">
+            <span>Learn More About Us</span>
+            <i class="fas fa-chevron-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+<section id="services" class="bg-gray-50 dark:bg-gray-800 py-20 px-6 animate-fadeIn">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h3 class="text-4xl font-bold mb-4 text-dark dark:text-white animate-slideUp">Our Services</h3>
+      <p class="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto animate-slideUp">Complete web development solutions for modern businesses</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- WordPress Development -->
+      <div class="service-card p-8 bg-white dark:bg-gray-700 shadow-xl rounded-lg transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary group">
+        <div class="service-icon bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6 transition duration-500 mx-auto">
+          <i class="fab fa-wordpress text-3xl text-primary"></i>
+        </div>
+        <h4 class="text-xl font-semibold mb-4 text-center dark:text-white">WordPress Development</h4>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">Custom themes, plugins, and scalable WordPress solutions with premium support.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Custom Theme Development</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> WooCommerce Solutions</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Headless WordPress</li>
+        </ul>
+      </div>
+
+      <!-- Shopify Development -->
+      <div class="service-card p-8 bg-white dark:bg-gray-700 shadow-xl rounded-lg transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary group">
+        <div class="service-icon bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6 transition duration-500 mx-auto">
+          <i class="fas fa-store text-3xl text-primary"></i>
+        </div>
+        <h4 class="text-xl font-semibold mb-4 text-center dark:text-white">Shopify Development</h4>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">High-converting Shopify stores with custom apps and themes.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Custom Shopify Themes</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> App Development</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Performance Optimization</li>
+        </ul>
+      </div>
+
+      <!-- MERN Stack Development -->
+      <div class="service-card p-8 bg-white dark:bg-gray-700 shadow-xl rounded-lg transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary group">
+        <div class="service-icon bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6 transition duration-500 mx-auto">
+          <i class="fab fa-react text-3xl text-primary"></i>
+        </div>
+        <h4 class="text-xl font-semibold mb-4 text-center dark:text-white">MERN Stack Development</h4>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">Full-stack applications with MongoDB, Express, React, and Node.js.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Single Page Applications</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> RESTful APIs</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Real-time Features</li>
+        </ul>
+      </div>
+
+      <!-- Next.js Development -->
+      <div class="service-card p-8 bg-white dark:bg-gray-700 shadow-xl rounded-lg transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary group">
+        <div class="service-icon bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6 transition duration-500 mx-auto">
+          <i class="fas fa-bolt text-3xl text-primary"></i>
+        </div>
+        <h4 class="text-xl font-semibold mb-4 text-center dark:text-white">Next.js Development</h4>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">High-performance React applications with server-side rendering.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> SSR/SSG Applications</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> API Routes</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> SEO Optimization</li>
+        </ul>
+      </div>
+
+      <!-- Vue.js Development -->
+      <div class="service-card p-8 bg-white dark:bg-gray-700 shadow-xl rounded-lg transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary group">
+        <div class="service-icon bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6 transition duration-500 mx-auto">
+          <i class="fab fa-vuejs text-3xl text-primary"></i>
+        </div>
+        <h4 class="text-xl font-semibold mb-4 text-center dark:text-white">Vue.js Development</h4>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">Interactive web applications with Vue.js ecosystem.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Vue 3 Composition API</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Pinia State Management</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Nuxt.js Integration</li>
+        </ul>
+      </div>
+
+      <!-- Spring Boot Development -->
+      <div class="service-card p-8 bg-white dark:bg-gray-700 shadow-xl rounded-lg transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary group">
+        <div class="service-icon bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6 transition duration-500 mx-auto">
+          <i class="fab fa-java text-3xl text-primary"></i>
+        </div>
+        <h4 class="text-xl font-semibold mb-4 text-center dark:text-white">Spring Boot Development</h4>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">Enterprise-grade Java applications with Spring framework.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> REST API Development</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Microservices Architecture</li>
+          <li class="flex items-center dark:text-gray-300"><i class="fas fa-check text-green-500 mr-2"></i> Database Integration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Technologies Section -->
+  <section id="technologies" class="py-20 px-6 text-center animate-fadeIn bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h3 class="text-4xl font-bold mb-6 text-dark dark:text-white">Technologies We Use</h3>
+      <p class="text-gray-700 dark:text-gray-300 text-lg mb-10 max-w-2xl mx-auto">We leverage cutting-edge technologies to build fast, secure, and scalable web applications.</p>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 mb-16">
+        <!-- WordPress -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/WordPress_blue_logo.svg" alt="WordPress" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">WordPress</span>
+        </div>
+        
+        <!-- Shopify -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/shopify.svg" alt="Shopify" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Shopify</span>
+        </div>
+        
+        <!-- React -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" alt="React" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">React.js</span>
+        </div>
+        
+        <!-- Next.js (added) -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" alt="Next.js" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Next.js</span>
+        </div>
+        
+        <!-- Vue.js -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg" alt="Vue.js" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Vue.js</span>
+        </div>
+        
+        <!-- Angular -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/angular-icon-1.svg" alt="Angular" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Angular</span>
+        </div>
+        
+        <!-- Node.js -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" alt="Node.js" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Node.js</span>
+        </div>
+        
+        <!-- MongoDB -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" alt="MongoDB" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">MongoDB</span>
+        </div>
+        
+        <!-- MySQL -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/MySQL_textlogo.svg" alt="MySQL" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">MySQL</span>
+        </div>
+        
+        <!-- PostgreSQL -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" alt="PostgreSQL" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">PostgreSQL</span>
+        </div>
+        
+        <!-- Spring Boot -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/spring-3.svg" alt="Spring Boot" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Spring Boot</span>
+        </div>
+        
+        <!-- Tailwind CSS -->
+        <div class="tech-icon flex flex-col items-center p-4 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+          <img src="https://cdn.worldvectorlogo.com/logos/tailwind-css-2.svg" alt="Tailwind CSS" class="h-16 mb-2">
+          <span class="font-medium dark:text-white">Tailwind CSS</span>
+        </div>
+      </div>
+      
+      <div class="bg-gradient-to-r from-primary to-blue-600 rounded-xl p-8 text-white text-left max-w-4xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-2/3 mb-6 md:mb-0">
+            <h4 class="text-2xl font-bold mb-2">Need a Custom Solution?</h4>
+            <p class="mb-4">We can build a custom solution using the perfect technology stack for your specific requirements.</p>
+            <button class="bg-white text-primary px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+              Discuss Your Project
+            </button>
+          </div>
+          <div class="md:w-1/3 flex justify-center">
+            <i class="fas fa-laptop-code text-6xl opacity-80"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="bg-gray-100 dark:bg-gray-800 py-20 px-6 animate-fadeIn">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-4xl font-bold mb-4 text-dark dark:text-white">Our Portfolio</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">A showcase of some of our latest and greatest projects.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Featured Projects (visible by default) -->
+        <div class="portfolio-item rounded-xl overflow-hidden shadow-lg relative h-64" 
+             style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
+            <h4 class="text-white text-xl font-bold mb-2">E-commerce WordPress Site</h4>
+            <p class="text-gray-300 mb-4">A fully customized WooCommerce solution with custom payment gateway integration.</p>
+            <div class="flex space-x-2">
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">WordPress</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">WooCommerce</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item rounded-xl overflow-hidden shadow-lg relative h-64" 
+             style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80');">
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
+            <h4 class="text-white text-xl font-bold mb-2">Real-Time MERN Dashboard</h4>
+            <p class="text-gray-300 mb-4">Analytics dashboard with real-time data visualization and user management.</p>
+            <div class="flex space-x-2">
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">React</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Node.js</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">MongoDB</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item rounded-xl overflow-hidden shadow-lg relative h-64" 
+                          style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
+            <h4 class="text-white text-xl font-bold mb-2">Custom Shopify Store</h4>
+            <p class="text-gray-300 mb-4">High-converting Shopify store with custom product configurator.</p>
+            <div class="flex space-x-2">
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Shopify</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Liquid</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">JavaScript</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hidden Projects -->
+        <div class="portfolio-item rounded-xl overflow-hidden shadow-lg relative h-64 hidden-portfolio" 
+             style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80');">
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
+            <h4 class="text-white text-xl font-bold mb-2">Next.js Blog Platform</h4>
+            <p class="text-gray-300 mb-4">SSG blog with content management and SEO optimization.</p>
+            <div class="flex space-x-2">
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Next.js</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">TypeScript</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item rounded-xl overflow-hidden shadow-lg relative h-64 hidden-portfolio" 
+             style="background-image: url('https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1336&q=80');">
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
+            <h4 class="text-white text-xl font-bold mb-2">Vue.js Admin Dashboard</h4>
+            <p class="text-gray-300 mb-4">Custom admin panel with role-based access control.</p>
+            <div class="flex space-x-2">
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Vue.js</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Pinia</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item rounded-xl overflow-hidden shadow-lg relative h-64 hidden-portfolio" 
+             style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
+            <h4 class="text-white text-xl font-bold mb-2">Spring Boot REST API</h4>
+            <p class="text-gray-300 mb-4">Enterprise API with JWT authentication and documentation.</p>
+            <div class="flex space-x-2">
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Spring Boot</span>
+              <span class="bg-primary bg-opacity-30 text-white px-3 py-1 rounded-full text-sm">Java</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10">
+        <button id="load-more" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+          Load More Projects
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-20 px-6 animate-fadeIn bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-4xl font-bold mb-4 text-dark dark:text-white">Meet Our Team</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">The talented individuals behind PrimeLogic's success.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Team Member 1 -->
+        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:scale-105">
+          <div class="team-image h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden transition duration-500">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                 alt="John Doe" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold mb-1 dark:text-white">John Doe</h4>
+            <p class="text-primary mb-3">CEO & Founder</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">With 10+ years in web development, John leads our strategic vision.</p>
+            <div class="flex space-x-3">
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Member 2 -->
+        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:scale-105">
+          <div class="team-image h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden transition duration-500">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                 alt="Jane Smith" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold mb-1 dark:text-white">Jane Smith</h4>
+            <p class="text-primary mb-3">Lead Developer</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Full-stack expert specializing in React and Node.js applications.</p>
+            <div class="flex space-x-3">
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Member 3 -->
+        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:scale-105">
+          <div class="team-image h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden transition duration-500">
+            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                 alt="Mike Johnson" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold mb-1 dark:text-white">Mike Johnson</h4>
+            <p class="text-primary mb-3">WordPress Specialist</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Creates custom WordPress solutions with a focus on performance.</p>
+            <div class="flex space-x-3">
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-wordpress"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Member 4 -->
+        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:scale-105">
+          <div class="team-image h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden transition duration-500">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                 alt="Sarah Williams" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold mb-1 dark:text-white">Sarah Williams</h4>
+            <p class="text-primary mb-3">UI/UX Designer</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Crafts beautiful, intuitive interfaces that users love.</p>
+            <div class="flex space-x-3">
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-dribbble"></i></a>
+              <a href="#" class="text-gray-500 hover:text-primary dark:hover:text-primary transition"><i class="fab fa-behance"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="bg-gray-50 dark:bg-gray-800 py-20 px-6 animate-fadeIn">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-4xl font-bold mb-4 text-dark dark:text-white">Client Testimonials</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">What our clients say about working with us.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 text-xl">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">"PrimeLogic transformed our online presence with a stunning WordPress site that perfectly represents our brand. Their attention to detail and customer service were exceptional."</p>
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                 alt="Emily Johnson" 
+                 class="w-12 h-12 rounded-full mr-4 object-cover">
+            <div>
+              <h5 class="font-bold dark:text-white">Emily Johnson</h5>
+              <p class="text-gray-500 dark:text-gray-400 text-sm">Marketing Director, Bright Solutions</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 text-xl">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">"The MERN stack application they built for us has revolutionized our internal processes. The team was professional, communicative, and delivered ahead of schedule."</p>
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                 alt="David Chen" 
+                 class="w-12 h-12 rounded-full mr-4 object-cover">
+            <div>
+              <h5 class="font-bold dark:text-white">David Chen</h5>
+              <p class="text-gray-500 dark:text-gray-400 text-sm">CTO, TechForward Inc.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 text-xl">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">"Our Shopify store's conversion rate increased by 45% after PrimeLogic's optimizations. Their e-commerce expertise is truly impressive."</p>
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                 alt="Maria Rodriguez" 
+                 class="w-12 h-12 rounded-full mr-4 object-cover">
+            <div>
+              <h5 class="font-bold dark:text-white">Maria Rodriguez</h5>
+              <p class="text-gray-500 dark:text-gray-400 text-sm">Founder, UrbanStyle</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog" class="py-20 px-6 animate-fadeIn bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-4xl font-bold mb-4 text-dark dark:text-white">Latest From Our Blog</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">Insights, tutorials, and industry trends from our team.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Blog Post 1 -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:-translate-y-2">
+          <div class="h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" 
+                 alt="Next.js Performance" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+              <span>June 15, 2023</span>
+              <span class="mx-2">•</span>
+              <span>8 min read</span>
+            </div>
+            <h4 class="text-xl font-bold mb-3 dark:text-white">Optimizing Next.js Applications for Peak Performance</h4>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Learn advanced techniques to make your Next.js apps faster and more efficient.</p>
+            <a href="#" class="text-primary font-medium flex items-center hover:underline">
+              Read Article <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Blog Post 2 -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:-translate-y-2">
+          <div class="h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1336&q=80" 
+                 alt="Vue 3 Composition" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+              <span>May 28, 2023</span>
+              <span class="mx-2">•</span>
+              <span>10 min read</span>
+            </div>
+            <h4 class="text-xl font-bold mb-3 dark:text-white">Mastering the Vue 3 Composition API</h4>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">A deep dive into the Composition API and how it changes Vue development.</p>
+            <a href="#" class="text-primary font-medium flex items-center hover:underline">
+              Read Article <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Blog Post 3 -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition transform hover:-translate-y-2">
+          <div class="h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                 alt="Spring Security" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+              <span>April 12, 2023</span>
+              <span class="mx-2">•</span>
+              <span>12 min read</span>
+            </div>
+            <h4 class="text-xl font-bold mb-3 dark:text-white">Implementing JWT Authentication in Spring Boot</h4>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Step-by-step guide to secure your Spring Boot applications with JWT.</p>
+            <a href="#" class="text-primary font-medium flex items-center hover:underline">
+              Read Article <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href="#" class="inline-block bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+          View All Articles
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-gray-100 dark:bg-gray-800 py-20 px-6 animate-fadeIn">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-4xl font-bold mb-4 text-dark dark:text-white">Get In Touch</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">Have a project in mind or want to discuss potential collaboration? We'd love to hear from you.</p>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-1/2">
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white">
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+              <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white">
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+              <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+              Send Message
+            </button>
+          </form>
+        </div>
+        
+        <div class="lg:w-1/2">
+          <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg h-full">
+            <h4 class="text-2xl font-bold mb-6 dark:text-white">Contact Information</h4>
+            
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                  <i class="fas fa-map-marker-alt text-primary"></i>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-lg dark:text-white">Our Office</h5>
+                  <p class="text-gray-600 dark:text-gray-300">123 Tech Street, Silicon Valley, CA 94000</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                  <i class="fas fa-envelope text-primary"></i>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-lg dark:text-white">Email Us</h5>
+                  <p class="text-gray-600 dark:text-gray-300">info@primelogic.dev</p>
+                  <p class="text-gray-600 dark:text-gray-300">support@primelogic.dev</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                  <i class="fas fa-phone-alt text-primary"></i>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-lg dark:text-white">Call Us</h5>
+                  <p class="text-gray-600 dark:text-gray-300">+1 (555) 123-4567</p>
+                  <p class="text-gray-600 dark:text-gray-300">Mon-Fri: 9am-6pm</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <h5 class="font-semibold text-lg mb-4 dark:text-white">Follow Us</h5>
+              <div class="flex space-x-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="bg-gradient-to-r from-primary to-blue-600 py-16 px-6 text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h3>
+      <p class="mb-8 opacity-90">Stay updated with the latest web development trends, tutorials, and company news.</p>
+      <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300">
+        <button type="submit" class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition whitespace-nowrap">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-code text-white"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold text-white">PrimeLogic</h3>
+          </div>
+          <p class="mb-4">Building digital experiences that drive results through innovative web solutions.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="hover:text-white transition">Home</a></li>
+            <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#services" class="hover:text-white transition">Services</a></li>
+            <li><a href="#portfolio" class="hover:text-white transition">Portfolio</a></li>
+            <li><a href="#blog" class="hover:text-white transition">Blog</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">WordPress Development</a></li>
+            <li><a href="#" class="hover:text-white transition">Shopify Development</a></li>
+            <li><a href="#" class="hover:text-white transition">MERN Stack Development</a></li>
+            <li><a href="#" class="hover:text-white transition">Next.js Development</a></li>
+            <li><a href="#" class="hover:text-white transition">Vue.js Development</a></li>
+            <li><a href="#" class="hover:text-white transition">Spring Boot Development</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Contact Info</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
+              <span>123 Tech Street, Silicon Valley, CA 94000</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
+              <span>info@primelogic.dev</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
+              <span>+1 (555) 123-4567</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-clock text-primary mr-3 mt-1"></i>
+              <span>Mon-Fri: 9am-6pm</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p>&copy; 2023 PrimeLogic. All rights reserved.</p>
+        <div class="mt-4 md:mt-0">
+          <a href="#" class="hover:text-white transition mr-4">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition mr-4">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-blue-700">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeIconMobile = document.getElementById('theme-icon-mobile');
+  
+  // Check for saved user preference or use system preference
+  if (localStorage.getItem('color-theme') === 'dark' || (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    themeIcon.textContent = '☀️';
+    themeIconMobile.textContent = '☀️';
+  } else {
+    document.documentElement.classList.remove('dark');
+    themeIcon.textContent = '🌙';
+    themeIconMobile.textContent = '🌙';
+  }
+  
+  // Toggle theme
+  function toggleTheme() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('color-theme', 'light');
+      themeIcon.textContent = '🌙';
+      themeIconMobile.textContent = '🌙';
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('color-theme', 'dark');
+      themeIcon.textContent = '☀️';
+      themeIconMobile.textContent = '☀️';
+    }
+  }
+  
+  // Add event listeners
+  themeToggle.addEventListener('click', toggleTheme);
+  themeToggleMobile.addEventListener('click', toggleTheme);
+
+  // Counter animation
+  const animateCounters = () => {
+    const projectsCount = document.getElementById('projects-count');
+    const clientsCount = document.getElementById('clients-count');
+    const experienceCount = document.getElementById('experience-count');
+    const technologiesCount = document.getElementById('technologies-count');
+    
+    const animate = (element, target) => {
+      let count = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        count += increment;
+        if (count >= target) {
+          count = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(count).toLocaleString();
+      }, 20);
+    };
+    
+    animate(projectsCount, 150);
+    animate(clientsCount, 120);
+    animate(experienceCount, 5);
+    animate(technologiesCount, 25);
+  };
+
+  // Load more portfolio items
+  const loadMoreBtn = document.getElementById('load-more');
+  const hiddenPortfolioItems = document.querySelectorAll('.hidden-portfolio');
+  let itemsShown = 0;
+  
+  loadMoreBtn.addEventListener('click', () => {
+    const itemsToShow = Math.min(3, hiddenPortfolioItems.length - itemsShown);
+    
+    for (let i = itemsShown; i < itemsShown + itemsToShow; i++) {
+      if (hiddenPortfolioItems[i]) {
+        hiddenPortfolioItems[i].classList.remove('hidden-portfolio');
+      }
+    }
+    
+    itemsShown += itemsToShow;
+    
+    if (itemsShown >= hiddenPortfolioItems.length) {
+      loadMoreBtn.style.display = 'none';
+    }
+  });
+
+  // Back to top button
+  const backToTopBtn = document.getElementById('back-to-top');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTopBtn.classList.remove('opacity-0', 'invisible');
+      backToTopBtn.classList.add('opacity-100', 'visible');
+    } else {
+      backToTopBtn.classList.remove('opacity-100', 'visible');
+      backToTopBtn.classList.add('opacity-0', 'invisible');
+    }
+  });
+  
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+        
+        // Close mobile menu if open
+        if (mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      }
+    });
+  });
+
+  // Initialize animations when page loads
+  window.addEventListener('load', () => {
+    animateCounters();
+    
+    // Animate elements when they come into view
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate-fadeIn, .animate-slideUp');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+    
+    // Initial check
+    animateOnScroll();
+    
+    // Check on scroll
+    window.addEventListener('scroll', animateOnScroll);
+  });
+</script>
+</body>
+</html>
